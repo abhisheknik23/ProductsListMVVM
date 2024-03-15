@@ -55,12 +55,11 @@ extension ProductListViewController {
                 print("Stop loading...")
             case .loaded:
                 print("Product loaded...")
-                print(self.viewModel.product)
                 DispatchQueue.main.async {
                     self.tabelView.reloadData()
                 }
             case .loadingError(let error):
-                print(error)
+                print(error ?? "error in loading")
             }
         }
     }
@@ -73,11 +72,11 @@ extension ProductListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell") as? ProductCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell") as? ProductCell,
+              let cellModel = viewModel.productCell(at: indexPath) else {
             return UITableViewCell()
         }
-        let product = viewModel.product[indexPath.row]
-        cell.product = product
+        cell.configure(with: cellModel)
         return cell
     }
 }

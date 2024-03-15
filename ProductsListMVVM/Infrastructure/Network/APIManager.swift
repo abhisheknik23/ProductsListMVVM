@@ -15,20 +15,21 @@ enum NetworkError: Error {
     case network(Error?)
 }
 
-class APIManager {
+protocol APIManager {
     
-    static let shared = APIManager()
+    func request<T: Decodable>(resultType: T.Type,
+                                 router: APIRouter,
+                                 completion: @escaping (Result<T, NetworkError>) -> Void)
+}
+
+extension APIManager {
     
-    private init() {}
     
-    func fetchData<T: Decodable>(requestURL: URL?, resultType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func request<T: Decodable>(resultType: T.Type,
+                                 router: APIRouter,
+                                 completion: @escaping (Result<T, NetworkError>) -> Void) {
         
-        guard let requestURL else {
-            completion(.failure(.invalidUrl))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: requestURL) { data, response, error in
+        URLSession.shared.dataTask(with: router.asURLRequest()) { data, response, error in
             guard let data, error == nil else {
                 completion(.failure(.invalidData))
                 return
@@ -49,5 +50,11 @@ class APIManager {
             
         }.resume()
     }
+    
+//    func fetchProductList(completion: @escaping (Result<[Product], NetworkError>) -> Void)  {
+//        return request(resultType: [Product].self,
+//                       router: APIRouter.getProductList,
+//                       completion: completion)
+//    }
     
 }

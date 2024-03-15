@@ -9,14 +9,18 @@ import Foundation
 
 final class ProductViewModel {
     
+    var productListService: ProductListServiceProtocol
+    
+    init(productListService: ProductListServiceProtocol = ProductListService() ) {
+        self.productListService = productListService
+    }
+    
     var product: [Product] = []
     var eventHandler: ((_ event: Event) -> Void)?
     
     func fetchProduct() {
         self.eventHandler?(.loading)
-        APIManager.shared.fetchData(requestURL: URL(string: Constant.API.productURL), 
-                                    resultType: [Product].self,
-                                    completion: { response in
+        productListService.getProductList { response in
             self.eventHandler?(.stoploading)
             switch response {
             case .success(let product):
@@ -27,7 +31,26 @@ final class ProductViewModel {
                 self.eventHandler?(.loadingError(error))
                 //print(error)
             }
-        })
+        }
+//        productListService.fetchData(requestURL: URL(string: Constant.API.productURL),
+//                                    resultType: [Product].self,
+//                                    completion: { response in
+//            self.eventHandler?(.stoploading)
+//            switch response {
+//            case .success(let product):
+//                self.product = product
+//                self.eventHandler?(.loaded)
+//                //print(product)
+//            case .failure(let error):
+//                self.eventHandler?(.loadingError(error))
+//                //print(error)
+//            }
+//        })
+    }
+    
+    func productCell(at index: IndexPath) -> ProductCellViewModel? {
+        guard product.has(index: index.row) else { return nil }
+        return ProductCellViewModel(product: product[index.row])
     }
 }
 

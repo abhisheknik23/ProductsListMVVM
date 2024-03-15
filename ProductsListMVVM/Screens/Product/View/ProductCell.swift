@@ -19,11 +19,9 @@ class ProductCell: UITableViewCell {
     @IBOutlet weak var buyButton: UIButton!
     
     @IBOutlet weak var productImage: UIImageView!
-    var product: Product? {
-        didSet {
-            configureCell()
-        }
-    }
+    
+    var viewModel: ProductCellViewModel?
+    var product: Product?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,15 +40,22 @@ class ProductCell: UITableViewCell {
     }
     
     func configureCell() {
-        guard let product else {
+        guard let viewModel else {
             return
         }
-        productTitle.text = product.title
-        productCategory.text = product.category
-        productDescription.text = product.description
-        productPrice.text = "$\(product.price)"
-        rateButton.setTitle("\(product.rating.rate)", for: .normal)
-        productImage.setImage(with: product.image)
+        productTitle.text = viewModel.productTitle
+        productCategory.text = viewModel.category
+        productDescription.text = viewModel.description
+        productPrice.text = "$\(viewModel.price)"
+        rateButton.setTitle("\(viewModel.rating ?? 0)", for: .normal)
+        productImage.setImage(with: viewModel.image)
     }
     
+}
+
+extension ProductCell: Configurable {
+    func configure(with model: ProductCellViewModel) {
+        viewModel = model
+        configureCell()
+    }
 }
