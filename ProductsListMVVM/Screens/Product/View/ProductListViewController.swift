@@ -33,16 +33,19 @@ class ProductListViewController: UIViewController {
 
 extension ProductListViewController {
     
-    func configuration() {
+    private func configuration() {
         tabelView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell")
         initialiseViewModel()
         observeEvent()
+        //Setup Navigationbar
+        navigationItem.backButtonTitle = ""
     }
-    func initialiseViewModel() {
+    
+    private func initialiseViewModel() {
         viewModel.fetchProduct()
     }
     
-    func observeEvent() {
+    private func observeEvent() {
         viewModel.eventHandler = { [weak self] event in
             guard let self else {
                 return
@@ -78,5 +81,22 @@ extension ProductListViewController: UITableViewDataSource {
         }
         cell.configure(with: cellModel)
         return cell
+    }
+}
+
+extension ProductListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        rowselected(indexPath: indexPath)
+    }
+    
+    private func rowselected(indexPath: IndexPath) {
+        guard let model = viewModel.productCell(at: indexPath) else {
+            return
+        }
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let prodcutDetailVC = storyBoard.instantiateViewController(identifier: "ProdcutDetailViewController") as! ProdcutDetailViewController
+        prodcutDetailVC.configure(with: ProductDtailViewModel(product: model.product))
+        navigationController?.pushViewController(prodcutDetailVC, animated: true)
     }
 }

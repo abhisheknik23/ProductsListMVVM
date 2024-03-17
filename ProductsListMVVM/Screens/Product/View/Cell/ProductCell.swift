@@ -39,7 +39,7 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell() {
+    private func configureCell() {
         guard let viewModel else {
             return
         }

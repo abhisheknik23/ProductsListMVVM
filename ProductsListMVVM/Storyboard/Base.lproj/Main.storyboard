@@ -21,6 +21,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Qq0-5Q-v9f"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="CYG-Ah-4UN"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -40,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.7251908396945" y="18.30985915492958"/>
+            <point key="canvasLocation" x="963" y="18"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vBC-5J-BMP">
@@ -59,6 +60,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JBE-Z8-kQa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="129.00763358778624" y="18.30985915492958"/>
+        </scene>
+        <!--Product Detail-->
+        <scene sceneID="Hw7-YE-rGa">
+            <objects>
+                <viewController storyboardIdentifier="ProdcutDetailViewController" id="5RS-py-d97" customClass="ProdcutDetailViewController" customModule="ProductsListMVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j9g-al-fU6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="k8b-Tg-Vm5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Product Detail" largeTitleDisplayMode="always" id="uaO-nm-sy9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cng-bb-EzJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963" y="727"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xca-5a-mDp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AxP-5O-akR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z2m-tg-dED">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5RS-py-d97" kind="relationship" relationship="rootViewController" id="aku-VC-aJN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u6g-Nt-IJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="727"/>
         </scene>
     </scenes>
     <resources>

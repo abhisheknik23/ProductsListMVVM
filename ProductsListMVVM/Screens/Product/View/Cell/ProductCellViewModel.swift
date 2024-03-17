@@ -7,13 +7,9 @@
 
 import Foundation
 
-class ProductCellViewModel {
+struct ProductCellViewModel {
     
     let product: Product
-    
-    init(product: Product) {
-        self.product = product
-    }
     
     var productTitle: String? {
         return product.title

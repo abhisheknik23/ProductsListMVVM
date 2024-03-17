@@ -7,16 +7,26 @@
 
 import Foundation
 
-protocol ProductListServiceProtocol {
-    func getProductList(completion: @escaping(Result<[Product], NetworkError>) -> Void)
+protocol ProductServiceDelegate: ProductListServiceDelegate, UserListServiceDelegate {
+    
 }
 
-class ProductListService: ProductListServiceProtocol, APIManager {
+protocol ProductListServiceDelegate {
+    func getProductList(completion: @escaping(Result<[Product], NetworkError>) -> Void)
+   
+}
+
+protocol UserListServiceDelegate {
+    func getUserList(completion: @escaping(Result<[Product], NetworkError>) -> Void)
+}
+
+class ProductListService: ProductServiceDelegate {
     func getProductList(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        request(resultType: [Product].self,
-                       router: APIRouter.getProductList,
-                       completion: completion)
+        APIManager().fetchRequest(resultType: [Product].self, router: APIRouter.getProductList, completion: completion)
     }
     
+    func getUserList(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
+        APIManager().fetchRequest(resultType: [Product].self, router: APIRouter.getProductList, completion: completion)
+    }
     
 }

@@ -9,43 +9,62 @@ import Foundation
 
 final class ProductViewModel {
     
-    var productListService: ProductListServiceProtocol
-    
-    init(productListService: ProductListServiceProtocol = ProductListService() ) {
-        self.productListService = productListService
-    }
-    
+    var productListService: ProductServiceDelegate
+    var databaseManager: ProductListServiceDelegate
     var product: [Product] = []
     var eventHandler: ((_ event: Event) -> Void)?
     
+    init(productListService: ProductServiceDelegate = ProductListService(),
+         databaseManager: ProductListServiceDelegate = DatabaseManager()) {
+        self.productListService = productListService
+        self.databaseManager = databaseManager
+    }
+    
     func fetchProduct() {
+        if isIntetnetAvailable() {
+            self.eventHandler?(.loading)
+            productListService.getProductList { response in
+                self.eventHandler?(.stoploading)
+                switch response {
+                case .success(let product):
+                    self.product = product
+                    self.eventHandler?(.loaded)
+                case .failure(let error):
+                    self.eventHandler?(.loadingError(error))
+                }
+            }
+        } else {
+            databaseManager.getProductList { response in
+                self.eventHandler?(.stoploading)
+                switch response {
+                case .success(let product):
+                    self.product = product
+                    self.eventHandler?(.loaded)
+                case .failure(let error):
+                    self.eventHandler?(.loadingError(error))
+                }
+            }
+        }
+        
+    }
+    
+    //Dummy function to implement SOLID's Open close principle
+    func fetchUsers() {
         self.eventHandler?(.loading)
-        productListService.getProductList { response in
+        productListService.getUserList { response in
             self.eventHandler?(.stoploading)
             switch response {
             case .success(let product):
                 self.product = product
                 self.eventHandler?(.loaded)
-                //print(product)
             case .failure(let error):
                 self.eventHandler?(.loadingError(error))
-                //print(error)
             }
         }
-//        productListService.fetchData(requestURL: URL(string: Constant.API.productURL),
-//                                    resultType: [Product].self,
-//                                    completion: { response in
-//            self.eventHandler?(.stoploading)
-//            switch response {
-//            case .success(let product):
-//                self.product = product
-//                self.eventHandler?(.loaded)
-//                //print(product)
-//            case .failure(let error):
-//                self.eventHandler?(.loadingError(error))
-//                //print(error)
-//            }
-//        })
+    }
+    
+    private func isIntetnetAvailable() -> Bool {
+        return true
     }
     
     func productCell(at index: IndexPath) -> ProductCellViewModel? {
