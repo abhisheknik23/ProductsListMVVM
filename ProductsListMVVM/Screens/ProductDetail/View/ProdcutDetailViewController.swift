@@ -27,6 +27,10 @@ class ProdcutDetailViewController: UIViewController {
         //Setup Navigationbar
         navigationItem.backButtonTitle = ""
     }
+    
+    deinit {
+        print("Detail VC dinit")
+    }
 
 }
 

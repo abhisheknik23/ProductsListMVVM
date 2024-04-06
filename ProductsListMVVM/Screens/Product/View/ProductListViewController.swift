@@ -28,6 +28,10 @@ class ProductListViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    deinit {
+        print("ProductListViewController dinit")
+    }
 
 }
 

@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="C0q-1X-7X0">
-                        <rect key="frame" x="0.0" y="0.0" width="357" height="121"/>
+                        <rect key="frame" x="16" y="0.0" width="325" height="121"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ate-b5-ATG">
-                                <rect key="frame" x="0.0" y="0.0" width="357" height="60.666666666666664"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="60.666666666666664"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVS-Ek-W7M">
-                                <rect key="frame" x="0.0" y="60.666666666666657" width="357" height="60.333333333333343"/>
+                                <rect key="frame" x="0.0" y="60.666666666666657" width="325" height="60.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,8 +36,8 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="C0q-1X-7X0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1KM-th-Mgb"/>
-                    <constraint firstAttribute="trailing" secondItem="C0q-1X-7X0" secondAttribute="trailing" id="8PR-Up-BAS"/>
+                    <constraint firstItem="C0q-1X-7X0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1KM-th-Mgb"/>
+                    <constraint firstAttribute="trailing" secondItem="C0q-1X-7X0" secondAttribute="trailing" constant="16" id="8PR-Up-BAS"/>
                     <constraint firstAttribute="bottom" secondItem="C0q-1X-7X0" secondAttribute="bottom" id="NOs-Xv-vSM"/>
                     <constraint firstItem="C0q-1X-7X0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jwO-9L-OPi"/>
                 </constraints>
