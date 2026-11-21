@@ -18,6 +18,7 @@ public enum AGHTTPMethod : String {
 
 public enum APIRouter {
     case getProductList
+    case getUserList
     
     var baseURL: URL {
         return URL(string: "https://fakestoreapi.com/")!
@@ -27,6 +28,8 @@ public enum APIRouter {
         switch self {
         case .getProductList:
             return "products"
+        case .getUserList:
+            return "users"
         }
     }
     
@@ -36,7 +39,7 @@ public enum APIRouter {
     
     private var method: AGHTTPMethod {
         switch self {
-        case .getProductList:
+        case .getProductList, .getUserList:
             return AGHTTPMethod.GET
         }
     }

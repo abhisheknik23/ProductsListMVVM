@@ -54,6 +54,7 @@ protocol APIHandlerDelegate {
 
 class APIHandler: APIHandlerDelegate {
     func fetchData(router: APIRouter, completion: @escaping(Result<Data, NetworkError>) -> Void) {
+        print(router.asURLRequest())
         URLSession.shared.dataTask(with: router.asURLRequest()) { data, response, error in
             guard let data = data, error == nil else {
                 return completion(.failure(.invalidData))

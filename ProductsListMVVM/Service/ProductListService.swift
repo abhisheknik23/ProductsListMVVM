@@ -26,7 +26,7 @@ class ProductListService: ProductServiceDelegate {
     }
     
     func getUserList(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        APIManager().fetchRequest(resultType: [Product].self, router: APIRouter.getProductList, completion: completion)
+        APIManager().fetchRequest(resultType: [Product].self, router: APIRouter.getUserList, completion: completion)
     }
     
 }
